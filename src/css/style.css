@@ -21,7 +21,8 @@ p {
     font-size: 10px;
     text-transform: uppercase;
     font-weight: 500;
-    margin-top: -15px;
+    /* margin: -5px 0; */
+    /* margin-top: -15px; */
     color: gray;
 }
 
@@ -89,14 +90,20 @@ img {
 
 .product-view {
     position: relative;
-    flex: 3;
+    /* flex: 3; */
     display: flex;
     flex-direction: column;
 }
 
+.product-img-container { height: 70vh; }
+
+.product-img-container img {
+    height: auto;
+}
+
 .product-img {
     flex: 5;
-    padding-top: 60px;
+    /* padding-top: 60px; */
 }
 
 .product-name {
@@ -125,11 +132,18 @@ img {
     text-transform: uppercase;
 }
 
+.product-info {
+    position: relative;
+    top: 25%;
+}
+
 .suggestions p {
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 500;
     color: #7a7a7a;
+    margin-bottom: 1rem;
+    /* text-align: end; */
 }
 
 .suggestions .box p {
