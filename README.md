@@ -3,7 +3,7 @@
 This project is a responsive product detail page inspired by the **"The Roger" collection page from ON**:  
 🔗 https://www.on.com/en-ch/collection/the-roger
 
-My goal is to recreate the clean, professional look and feel of the original ON sneaker product layout, using **HTML**, **Tailwind CSS**, and **JavaScript** with **GSAP animations**.
+My goal is to recreate the clean, professional look and feel of the original ON sneaker product layout, using **HTML**, **CSS**, and **JavaScript** with **GSAP animations**.
 
 The idea is to enhance the static design with interactive animations and page transitions inspired by a YouTube tutorial by CodeGrid:  
 🎬 https://youtu.be/CXpY4wHsSCk
@@ -12,35 +12,20 @@ The idea is to enhance the static design with interactive animations and page tr
 
 ## ✅ Features
 
-- Responsive layout using Tailwind CSS
+- Responsive layout using CSS
 - Horizontally scrolling image carousel on desktop
 - Stacked layout on mobile for performance and accessibility
 - Clean product details (title, color, price, CTA)
 - Related sneaker recommendations below product info
-- **Remote image linking** (from ON’s site) to reduce local asset load
 - Basic entry animations using GSAP
-
-<br/>
-
-## 🌐 Image Optimization Strategy
-
-To improve performance and reduce project size, all product and recommendation images are linked directly from **ON’s official website** rather than downloaded and hosted locally.
-
-### Benefits:
-- ✅ Faster page load with no image hosting setup
-- ✅ Reduced project size for easier deployment
-- ✅ Immediate access to high-resolution, optimized images
-- ✅ Easier updates by simply replacing the URLs
-
-This keeps the project lightweight and efficient, especially when deployed online.
 
 <br/>
 
 ## 📦 Tech Stack
 
 - HTML5
-- Tailwind CSS
-- JavaScript (Vanilla)
+- CSS
+- JavaScript 
 - GSAP (GreenSock Animation Platform)
 
 <br/>
