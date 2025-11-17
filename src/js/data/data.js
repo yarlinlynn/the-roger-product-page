@@ -2781,7 +2781,7 @@ export const products = [
         "https://images.ctfassets.net/hnk2vsx53n6l/42XxfhUO4YI4ThOR9jpIpP/9f427ec590771de55576119b79a1dd4e/145a5c98b207fb8090e530a3dd562f82f1e1b8ae.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80",
         "https://images.ctfassets.net/hnk2vsx53n6l/ST4KkjVyfsndQ5OkNOiIh/f17d59d7258f7a26339498c358005dc6/50e74a19e76712903b8bba89409626cd35deecec.png?w=1200&h=1200&fm=avif&f=center&fit=fill&q=80"
     ]
-  }
+  },
 
    // Cloud 6 Waterproof : 4
   {
@@ -3375,21 +3375,21 @@ export const products = [
   },
 
   // 
-  {
-    "id": ,
-    "name": "",
-    "description": "",
-    "price": ,
-    "category": "",
-    "images": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-    ],
-    "recommendedProducts": []
-  },
+  // {
+  //   "id": ,
+  //   "name": "",
+  //   "description": "",
+  //   "price": ,
+  //   "category": "",
+  //   "images": [
+  //       "",
+  //       "",
+  //       "",
+  //       "",
+  //       "",
+  //       ""
+  //   ],
+  //   "recommendedProducts": []
+  // },
 ]
 
