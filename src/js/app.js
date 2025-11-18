@@ -676,6 +676,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 isDragging = true;
                 isClicking = false;
             });
+            box.addEventListener("mouseup", () => {
+                if(!isDragging && isClicking) {
+                    openProductDetails(product);
+                }
+            });
             // box.addEventListener("click", () => {
             //     if (!isDragging && isClicking) {
             //         openProductModal(product);
@@ -751,6 +756,71 @@ document.addEventListener("DOMContentLoaded", function() {
             y: translateY,
             duration: 0.15,
             ease: "power1.out"
+        });
+    }
+
+    // build product details modal
+    function openProductDetails(product) {
+        console.log("product clicked:", product);
+        const productModal = document.createElement("section");
+        productModal.classList.add("modal");
+
+        productModal.innerHTML = `
+            <div class="col product-view">
+                <div class="close">
+                    <i class="ri-close-fill"></i>
+                </div>
+                <div class="product-img">
+                    <div id="carouselTrack" class="product-img-container">
+                    
+                    <img src="${product.images[0]}" alt="${product.name}"/>
+                    </div>
+                </div>
+                <div class="product-name">
+                    <div class="name">
+                    <h1>${product.name}</h1>
+                    <p>${product.category}</p>
+                    </div>
+                    <div class="cart-btn">
+                    <button>Add to cart</button>
+                    </div>
+                </div>
+                </div>
+                <div class="col product-info"> 
+                <div>
+                    <p>
+                    ${product.price}
+                    </p>
+                    <p>
+                    ${product.description}
+                    </p>
+                </div>
+                <div class="suggestions">
+                    <p>Users also bought</p>
+                    <div class="box">
+                    <img src="./src/images/img2.avif" alt="The Roger Advantage"/>
+                    <p>The Roger Advantage</p>
+                    <h1>Black | Black</h1>
+                    </div>
+                    <div class="box">
+                    <img src="./src/images/img3.avif" alt="The Roger Advantage"/>
+                    <p>The Roger Advantage</p>
+                    <h1>White | Olive</h1>
+                    </div>
+                </div>
+            </div> 
+        `;
+
+        document.body.appendChild(productModal);
+
+        productModal.querySelector(".close").addEventListener("click", () => {
+            productModal.remove();
+        });
+
+        productModal.addEventListener("click", e => {
+            if (e.target === productModal) {
+                productModal.remove();
+            }
         });
     }
 

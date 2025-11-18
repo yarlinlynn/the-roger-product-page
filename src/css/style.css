@@ -180,7 +180,7 @@ img {
     left: 0;
     z-index: 2;
     background: #f4efef;
-    display: none;
+    /* display: none; */
 }
 
 .col {
