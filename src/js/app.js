@@ -771,11 +771,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     <i class="ri-close-fill"></i>
                 </div>
                 <div class="product-img">
-                    <div id="carouselTrack" class="product-img-container">
-                    
-                    <img src="${product.images[0]}" alt="${product.name}"/>
-                    </div>
+                    <div class="carousel">
+                        <div id="carouselTrack" class="product-img-container"></div>
+                    </div>  
+                    <button class="carousel-btn prev">
+                        <i class="ri-arrow-left-line"></i>
+                    </button>  
+                    <button class="carousel-btn next">
+                        <i class="ri-arrow-right-line"></i>
+                    </button>   
+                    <div class="carousel-counter"></div>
                 </div>
+                
                 <div class="product-name">
                     <div class="name">
                     <h1>${product.name}</h1>
@@ -822,6 +829,96 @@ document.addEventListener("DOMContentLoaded", function() {
                 productModal.remove();
             }
         });
+
+        const track = productModal.querySelector("#carouselTrack");
+        const counter = productModal.querySelector(".carousel-counter");
+        const btnPrev = productModal.querySelector(".prev");
+        const btnNext = productModal.querySelector(".next");
+
+        let images = product.images;
+
+        images.forEach(src => {
+            const img = document.createElement("img");
+            img.src = src;
+            img.classList.add("slide");
+            track.appendChild(img)
+        });
+
+        const firstClone = track.children[0].cloneNode(true);
+        const lastClone = track.children[images.length - 1].cloneNode(true);
+
+        track.prepend(lastClone);
+        track.appendChild(firstClone);
+
+        let slides = Array.from(track.children);
+        let index = 1;
+        const totalSlides = images.length;
+
+        function updateCounter(realIndex) {
+            counter.textContent = `${realIndex}/${totalSlides}`;
+        }
+
+        function updatePosition(smooth = true) {
+            // const slideWidth = slides[0].offsetWidth;
+            // const gap = 10;
+            const styles = getComputedStyle(track);
+            const gap = parseFloat(styles.gap) || 0;
+            const slideWidth = slides[0].getBoundingClientRect().width;
+
+            if(!smooth) track.style.transition = "none";
+            else track.style.transition = "transform 0.45s ease-in-out";
+
+            // track.style.transform = `translateX(-${index * (slideWidth + gap)}px)`;
+            track.style.transform = `translateX(-${index * (slideWidth + gap)}px)`;
+
+            let realIndex = index === 0 ? totalSlides : index === slides.length - 1 ? 1 : index;
+
+            updateCounter(realIndex);
+        }
+
+        function moveNext() {
+            if(index >= slides.length - 1) return;
+            index++;
+            updatePosition();
+        }
+
+        function movePrev() {
+            if(index <= 0) return;
+            index--;
+            updatePosition();
+        }
+
+        btnPrev.addEventListener("click", movePrev);
+        btnNext.addEventListener("click", moveNext);
+
+        track.addEventListener("transitionend", () => {
+            if (slides[index] === slides[slides.length -1 ]) {
+                index = 1;
+                requestAnimationFrame(() => updatePosition(false));
+            }
+            if (slides[index] === slides[0]) {
+                index = slides.length - 2;
+                requestAnimationFrame(() => updatePosition(false));
+            }
+        });
+
+        let startX = 0;
+
+        track.addEventListener("touchstart", e => (startX = e.touches[0].clientX));
+        track.addEventListener("touchend", e => {
+            const diff = e.changedTouches[0].clientX - startX;
+            if (diff < -50) moveNext();
+            if (diff > 50) movePrev();
+        });
+
+        window.addEventListener("resize", () => updatePosition(false));
+        updatePosition(false);
+
+        // function imgSlide(i) {
+        //     index = (i + images.length) % images.length;
+        //     track.style.transform = `translateX(-${index * 100}%)`;
+        //     updateCounter();
+        // }
     }
 
 });
