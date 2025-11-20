@@ -182,9 +182,15 @@ img {
     background: #f4efef;
 }
 
-.col {
+.col.product-view {
     /* height: 100%; */
-    padding: 2em;
+    padding: 1em 2em;
+}
+
+.col.product-info { 
+    padding: 1em;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 .close-btn {
@@ -199,6 +205,30 @@ img {
     color: #fff;
     border-radius: 100%;
     cursor: pointer;
+}
+
+/* .product-name {
+    position: relative;
+    top: 0.8rem;
+} */
+
+.product-name > .name {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.product-name > .name > p { letter-spacing: 1.5px; }
+
+.details { margin-top: -20px; }
+
+.details p:first-child { font-size: 1rem; }
+
+.details p:last-child {
+    font-size: 1rem;
+    margin: 1rem 0 1.5rem;
+    /* letter-spacing: 1px; */
+    text-transform: none;
 }
 /* 
 .product-view {
@@ -248,17 +278,24 @@ img {
     top: 25%;
 } */
 
+.suggestions {
+    position: relative;
+    top: -20px;
+}
+
 .suggestions p {
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 500;
     color: #7a7a7a;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    text-align: end;
 }
 
-.suggestions .box p {
+/* .suggestions .box p {
     margin: -15px 0 0 0;
-} 
+}  */
+.carousel { height: 45vh; } 
 
 #carouselTrack {
     height: 50vh;
@@ -274,6 +311,7 @@ img {
 
 .close {
     position: fixed;
+    top: 2rem;
     right: 2rem;
     background: black;
     color: white;
@@ -286,3 +324,50 @@ img {
 }
 
 .close > .ri-close-fill { font-size: 20px; }
+
+.carousel-counter {
+    float: left;
+    letter-spacing: 3px;
+    position: relative;
+    left: 4.5rem;
+}
+
+.suggestions-list {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-controls {
+    position: fixed;
+    /* background: rgb(245, 240, 240); */
+    bottom: 0;
+    /* border: 1px solid black; */
+    width: 100%;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem 0.5rem;
+}
+
+.cart-controls .add-to-cart {
+    background: black;
+    width: 70%;
+    height: 60px;
+    color: white;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    border-radius: 2rem;
+}
+
+.cart-controls .open-cart {
+    background: white;
+    width: 20%;
+    height: 60px;
+    border-radius: 70vh;
+    font-size: 1.3rem;
+}
+
+.suggestive-product img { width: 120px; }

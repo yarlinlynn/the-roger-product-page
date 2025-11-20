@@ -771,14 +771,15 @@ document.addEventListener("DOMContentLoaded", function() {
         productModal.innerHTML = `
             <div class="overlay">
                 <div class="product-details">
+                    <div class="close">
+                    <i class="ri-close-fill"></i>
+                    </div>
                     <div class="col product-view">
-                        <div class="close">
-                            <i class="ri-close-fill"></i>
-                        </div>
-                        <div class="product-img">
-                            <div class="carousel">
-                                <div id="carouselTrack" class="product-img-container"></div>
-                            </div>  
+                    <div class="product-img">
+                        <div class="carousel">
+                            <div id="carouselTrack" class="product-img-container"></div>
+                        </div> 
+                        <div class="image-controls">
                             <button class="carousel-btn prev">
                                 <i class="ri-arrow-left-line"></i>
                             </button>  
@@ -787,39 +788,30 @@ document.addEventListener("DOMContentLoaded", function() {
                             </button>   
                             <div class="carousel-counter"></div>
                         </div>
-                    <div>    
-                    <div class="col product-info"> 
-                            <div class="product-name">
-                                <div class="name">
-                                    <h1>${product.name}</h1>
-                                    <p>${product.category}</p>
-                                    </div>
-                                <div class="cart-btn">
-                                <button>Add to cart</button>
-                            </div>
-                        </div>
-                        <div>
-                            <p>
-                            ${product.price}
-                            </p>
-                            <p>
-                            ${product.description}
-                            </p>
-                        </div>
-                        <div class="suggestions">
-                            <p>Users also bought</p>
-                            <div class="box">
-                                <img src="./src/images/img2.avif" alt="The Roger Advantage"/>
-                                <p>The Roger Advantage</p>
-                                <h1>Black | Black</h1>
-                            </div>
-                            <div class="box">
-                                <img src="./src/images/img3.avif" alt="The Roger Advantage"/>
-                                <p>The Roger Advantage</p>
-                                <h1>White | Olive</h1>
-                            </div>
-                        </div>
+                    </div>
+                    </div>
+                    <div class="col product-info">
+                    <div class="product-name">
+                        <div class="name">
+                        <h1>${product.name}</h1>
+                        <p>${product.category}</p>
+                        </div>                      
+                    </div>
+                    <div class="cart-controls">
+                        <button class="add-to-cart">Add to cart</button>
+                        <button class="open-cart" id="cart-toggle">
+                        <i class="ri-shopping-bag-4-line"></i>
+                        </button>
+                    </div>
+                    <div class="details">
+                        <p>R ${product.price}</p>
+                        <p>${product.description}</p>
                     </div> 
+                    <div class="suggestions">
+                        <p>Users also bought</p>
+                        <div class="suggestions-list"></div>
+                    </div>
+                    </div>
                 </div>
             </div>
         `;
@@ -925,11 +917,24 @@ document.addEventListener("DOMContentLoaded", function() {
         window.addEventListener("resize", () => updatePosition(false));
         updatePosition(false);
 
-        // function imgSlide(i) {
-        //     index = (i + images.length) % images.length;
-        //     track.style.transform = `translateX(-${index * 100}%)`;
-        //     updateCounter();
-        // }
+        const suggestionsList = productModal.querySelector(".suggestions-list");
+
+        product.recommendedProducts.forEach( id => {
+            const suggested = products.find(p => p.id === id);
+            if(!suggested) return;
+
+            const box = document.createElement("div");
+            box.classList.add("suggestive-product");
+            box.innerHTML = `
+                    <img src="${suggested.images[0]}" alt="${suggested.name}"/>
+            `;
+
+            box.addEventListener("click", () => {
+                productModal.remove();
+                openProductDetails(suggested)
+            });
+            suggestionsList.appendChild(box);
+        })
     }
 
 });
