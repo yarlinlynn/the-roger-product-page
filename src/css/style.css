@@ -180,7 +180,6 @@ img {
     left: 0;
     z-index: 2;
     background: #f4efef;
-    /* display: none; */
 }
 
 .col {
@@ -283,6 +282,7 @@ img {
     border-radius: 50vh;
     padding: 0.6rem;
     font-size: 17px;
+    z-index: 999;
 }
 
 .close > .ri-close-fill { font-size: 20px; }

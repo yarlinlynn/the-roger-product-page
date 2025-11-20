@@ -765,63 +765,74 @@ document.addEventListener("DOMContentLoaded", function() {
         const productModal = document.createElement("section");
         productModal.classList.add("modal");
 
+        const existing = document.querySelector(".modal");
+        if (existing) existing.remove();
+
         productModal.innerHTML = `
-            <div class="col product-view">
-                <div class="close">
-                    <i class="ri-close-fill"></i>
+            <div class="overlay">
+                <div class="product-details">
+                    <div class="col product-view">
+                        <div class="close">
+                            <i class="ri-close-fill"></i>
+                        </div>
+                        <div class="product-img">
+                            <div class="carousel">
+                                <div id="carouselTrack" class="product-img-container"></div>
+                            </div>  
+                            <button class="carousel-btn prev">
+                                <i class="ri-arrow-left-line"></i>
+                            </button>  
+                            <button class="carousel-btn next">
+                                <i class="ri-arrow-right-line"></i>
+                            </button>   
+                            <div class="carousel-counter"></div>
+                        </div>
+                    <div>    
+                    <div class="col product-info"> 
+                            <div class="product-name">
+                                <div class="name">
+                                    <h1>${product.name}</h1>
+                                    <p>${product.category}</p>
+                                    </div>
+                                <div class="cart-btn">
+                                <button>Add to cart</button>
+                            </div>
+                        </div>
+                        <div>
+                            <p>
+                            ${product.price}
+                            </p>
+                            <p>
+                            ${product.description}
+                            </p>
+                        </div>
+                        <div class="suggestions">
+                            <p>Users also bought</p>
+                            <div class="box">
+                                <img src="./src/images/img2.avif" alt="The Roger Advantage"/>
+                                <p>The Roger Advantage</p>
+                                <h1>Black | Black</h1>
+                            </div>
+                            <div class="box">
+                                <img src="./src/images/img3.avif" alt="The Roger Advantage"/>
+                                <p>The Roger Advantage</p>
+                                <h1>White | Olive</h1>
+                            </div>
+                        </div>
+                    </div> 
                 </div>
-                <div class="product-img">
-                    <div class="carousel">
-                        <div id="carouselTrack" class="product-img-container"></div>
-                    </div>  
-                    <button class="carousel-btn prev">
-                        <i class="ri-arrow-left-line"></i>
-                    </button>  
-                    <button class="carousel-btn next">
-                        <i class="ri-arrow-right-line"></i>
-                    </button>   
-                    <div class="carousel-counter"></div>
-                </div>
-                
-                <div class="product-name">
-                    <div class="name">
-                    <h1>${product.name}</h1>
-                    <p>${product.category}</p>
-                    </div>
-                    <div class="cart-btn">
-                    <button>Add to cart</button>
-                    </div>
-                </div>
-                </div>
-                <div class="col product-info"> 
-                <div>
-                    <p>
-                    ${product.price}
-                    </p>
-                    <p>
-                    ${product.description}
-                    </p>
-                </div>
-                <div class="suggestions">
-                    <p>Users also bought</p>
-                    <div class="box">
-                    <img src="./src/images/img2.avif" alt="The Roger Advantage"/>
-                    <p>The Roger Advantage</p>
-                    <h1>Black | Black</h1>
-                    </div>
-                    <div class="box">
-                    <img src="./src/images/img3.avif" alt="The Roger Advantage"/>
-                    <p>The Roger Advantage</p>
-                    <h1>White | Olive</h1>
-                    </div>
-                </div>
-            </div> 
+            </div>
         `;
 
         document.body.appendChild(productModal);
 
         productModal.querySelector(".close").addEventListener("click", () => {
             productModal.remove();
+        });
+        productModal.querySelector(".overlay").addEventListener("click", (e) => {
+            if (e.target.classList.contains("overlay")) {
+                productModal.remove();
+            }
         });
 
         productModal.addEventListener("click", e => {
