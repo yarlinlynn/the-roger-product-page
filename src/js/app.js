@@ -671,12 +671,24 @@ document.addEventListener("DOMContentLoaded", function() {
                 isDragging = false;
                 isClicking = true;
             });
-
+            box.addEventListener("touchstart", () => {
+                isDragging = false;
+                isClicking = true;
+            });
             box.addEventListener("mousemove", () => {
                 isDragging = true;
                 isClicking = false;
             });
+            box.addEventListener("touchmove", () => {
+                isDragging = true;
+                isClicking = false;
+            });
             box.addEventListener("mouseup", () => {
+                if(!isDragging && isClicking) {
+                    openProductDetails(product);
+                }
+            });
+            box.addEventListener("touchend", () => {
                 if(!isDragging && isClicking) {
                     openProductDetails(product);
                 }
@@ -808,9 +820,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         <p>${product.description}</p>
                     </div> 
                     <div class="suggestions">
-                        <p>Users also bought</p>
-                        <div class="suggestions-list"></div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -917,7 +926,7 @@ document.addEventListener("DOMContentLoaded", function() {
         window.addEventListener("resize", () => updatePosition(false));
         updatePosition(false);
 
-        const suggestionsList = productModal.querySelector(".suggestions-list");
+        const suggestionsList = productModal.querySelector(".suggestions");
 
         product.recommendedProducts.forEach( id => {
             const suggested = products.find(p => p.id === id);
@@ -935,6 +944,8 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             suggestionsList.appendChild(box);
         })
+
+
     }
 
 });
