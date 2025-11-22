@@ -709,15 +709,38 @@ document.addEventListener("DOMContentLoaded", function() {
     let startCoords = { x: 0, y: 0 };
     let startTranslate = { x: 0, y: 0 };
 
+    // for desktop devices
     productsRendered.addEventListener("mousedown", onDragStart);
     productsRendered.addEventListener("mouseup", onDragEnd);
     productsRendered.addEventListener("mouseleave", onDragEnd);
     productsRendered.addEventListener("mousemove", onDrag);
+    
+    // for mobile devices
+    productsRendered.addEventListener("touchstart", onDragStart);
+    productsRendered.addEventListener("touchend", onDragEnd);
+    productsRendered.addEventListener("touchmove", onDrag);   
+    productsRendered.addEventListener("mousemove", onDrag);
+
+    // helper function for mobile devices having similiar functionality
+    function getXY(e) {
+        if (e.touches && e.touches.length > 0) {
+            return {
+                x: e.touches[0].clientX,
+                y: e.touches[0].clientY
+            };
+        }
+        return {
+            x: e.clientX,
+            y: e.clientY
+        };
+    }
 
     function onDragStart(e) {
         isContainerDragging = true;
-        startCoords.x = e.clientX;
-        startCoords.y = e.clientY;
+
+        const pos = getXY(e);
+        startCoords.x = pos.x;
+        startCoords.y = pos.y;
 
         startTranslate.x = gsap.getProperty(productsRendered, "x");
         startTranslate.y = gsap.getProperty(productsRendered, "y");
@@ -742,8 +765,10 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!isContainerDragging) return;
         e.preventDefault();
 
-        const deltaX = e.clientX - startCoords.x;
-        const deltaY = e.clientY - startCoords.y;
+        const pos = getXY(e);
+
+        const deltaX = pos.x - startCoords.x;
+        const deltaY = pos.y - startCoords.y;
 
         let translateX = startTranslate.x + deltaX;
         let translateY = startTranslate.y + deltaY;
